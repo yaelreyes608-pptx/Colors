@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Colors generator - Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background 0.3s ease;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .color-code {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app" :style="{ backgroundColor: colorActual }">
+  <div class="container">
+    <button @click="generarColor">Generar Color 🎨</button>
+    <div class="color-code">
+      Color actual: {{ colorActual }}
+    </div>
+  </div>
+</div>
+
+<script>
+const { createApp } = Vue
+
+createApp({
+  data() {
+    return {
+      colorActual: "#3498db"
+    }
+  },
+  methods: {
+    generarColor() {
+        const letras = "0123456789ABCDEF"
+        let color = "#"
+        for (let i = 0; i < 6; i++) {
+        color += letras[Math.floor(Math.random() * 16)]
+      }
+      this.colorActual = color
+      document.body.style.backgroundColor = color
+    }
+  }
+}).mount('#app')
+</script>
+
+</body>
+</html>
